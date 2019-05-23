@@ -1,12 +1,12 @@
-pipeline{
+pipeline {
     agent any
     stages{
-	    stage('SCM checkout'){
+	 stage('SCM checkout'){
 	      git 'https://github.com/ramki7/sample_maven.git'
-	    }
-	    stage('Compile Package'){
+	  }
+	  stage('Compile Package'){
 	      def mvnHome = tool name: 'mymaven', type: 'maven'
 	      sh "${mvnHome}/bin/mvn package"	    
-	    }
+	  }
 	
 }
