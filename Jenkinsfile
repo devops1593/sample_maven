@@ -1,21 +1,14 @@
 pipeline {
     agent any
+
     stages {
-        stage ('checkout'){
-            step {
-            git 'https://github.com/ramki7/sample_maven.git'
-            } 
+        stage ('Complie stage') {
+
+            steps {
+               withMaven(Maven : 'maven_3_6_1'){
+                   sh 'mvn clean compile package'
+               }
+            }        
         }
-        def MVNHOME =  tool name: 'mymaven', type: 'maven'
-        stage ('compile'){
-            step {
-            sh "${MVNHOME}/bin/mvn compile test"
-            }
-        }
-        stage ('build'){
-            step {
-            sh "${MVNHOME}/bin/mvn package"
-            }
-    }
-    }
+       
 }
