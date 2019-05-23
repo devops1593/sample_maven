@@ -1,12 +1,14 @@
 pipeline {
     agent any
-    stages{
-	 stage('SCM checkout'){
-	      git 'https://github.com/ramki7/sample_maven.git'
-	  }
-	  stage('Compile Package'){
-	      def mvnHome = tool name: 'mymaven', type: 'maven'
-	      sh "${mvnHome}/bin/mvn package"	    
-	  }
-	
+
+    stages {
+        stage ('Complie stage') {
+
+            steps {
+               withMaven(Maven : 'maven_3_6_1'){
+                   sh 'mvn clean compile package'
+               }
+            }        
+        }
+       
 }
